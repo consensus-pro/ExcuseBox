@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ExcuseBox</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #ffffff;
+        }
+
+        .title {
+            font-size: clamp(2.8rem, 9vw, 5.2rem);
+            font-weight: 900;
+            letter-spacing: 0.04em;
+            text-transform: none;
+            user-select: none;
+
+            /*
+                调整停止点：让青（#00FFFF）和蓝（#0000FF）区域稍微宽一些
+                按以下百分比分配（共14个色块，两个周期）：
+                红 0-6%　橙 6-13%　黄 13-20%　绿 20-27%
+                青 27-35%　蓝 35-43%　紫 43-50%　红 50-56%　橙 56-63%　黄 63-70%　绿 70-77%　青 77-85%　蓝 85-93%　紫 93-100%
+            */
+            background-image: linear-gradient(90deg,
+                #FF0000 0%,    #FF7F00 6%,    #FFFF00 13%,   #00FF00 20%,
+                #00FFFF 27%,   #0000FF 35%,   #8B00FF 43%,   #FF0000 50%,
+                #FF7F00 56%,   #FFFF00 63%,   #00FF00 70%,   #00FFFF 77%,
+                #0000FF 85%,   #8B00FF 93%,   #FF0000 100%
+            );
+            /* 背景宽度为容器的 8 倍，窗口显示 1/8 ≈ 12.5%，小于两个颜色宽度 */
+            background-size: 800% 100%;
+            background-position: 0% 0%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+
+            /* 移动一个完整周期（背景宽度的 50%），耗时 25 秒，匀速无缝 */
+            animation: flowRight 25s linear infinite;
+            will-change: background-position;
+        }
+
+        @keyframes flowRight {
+            0%   { background-position: 0% 0%; }
+            100% { background-position: 57.14% 0%; } /* 精确计算，无缝衔接 */
+        }
+    </style>
+</head>
+<body>
+    <div class="title">ExcuseBox</div>
+</body>
+</html>
